@@ -27,12 +27,17 @@ class BuddyWindow(MDScreen):
         if model_name == 'persenk110' or model_name == 'tryavna100':
             info = 'Find friend feature not available for this race yet!'
             self.show_dialog(info)
+        # if missing config.ini
         # 2549 for DNF
         # 2206 for third place
         app = MDApp.get_running_app()
-        race_result_url = app.config['raceresult']['Url'] + input_bib
-        # response = requests.get(race_result_url)
-        UrlRequest(race_result_url, on_success=self.process_successful_buddy_request, on_failure=self.failure, on_error=self.error, ca_file=certifi.where())
+        try:
+            race_result_url = app.config['raceresult']['Url'] + input_bib
+            # response = requests.get(race_result_url)
+            UrlRequest(race_result_url, on_success=self.process_successful_buddy_request, on_failure=self.failure, on_error=self.error, ca_file=certifi.where())
+        except KeyError:
+            info = 'No configuration file available.'
+            self.show_dialog(info)
 
     def process_successful_buddy_request(self, urlrequest, response):
         """Processes successful url requests."""

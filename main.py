@@ -1,4 +1,5 @@
 import configparser
+import os.path
 
 from kivy.core.window import Window
 from kivymd.app import MDApp
@@ -20,10 +21,12 @@ class UltraBuddyApp(MDApp):
     def on_start(self):
         """Read configs, apply theme, connect to DB, get route points and stations, initiate GPS service."""
 
-        # Read configs
-        self.config = configparser.ConfigParser(interpolation=None)
-        self.config.read('config.ini')
-        # print(self.config['raceresult']['url'])
+        # Read configs if config file available
+        if os.path.isfile('config.ini'):
+            print('Found config file!')
+            self.config = configparser.ConfigParser(interpolation=None)
+            self.config.read('config.ini')
+            # print(self.config['raceresult']['url'])
 
         # Apply theme
         self.theme_cls.primary_palette = 'LightGreen'
