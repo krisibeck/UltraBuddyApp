@@ -5,7 +5,9 @@
 
 [//]: <> (Image of App)
 
-![Ultra Buddy App] (./img/home_screen.png)
+<p align="center">
+    <img align="center" src="https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen.png"/>
+</p>
 
 > Ultra Buddy provides information for runners during ultra races. 
 > The runner can see a map of the race with aid stations along the way.
