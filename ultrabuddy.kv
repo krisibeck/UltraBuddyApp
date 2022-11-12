@@ -1,0 +1,53 @@
+#:include kv/mainwindow.kv
+#:include kv/mapwindow.kv
+#:include kv/nextwindow.kv
+#:include kv/buddywindow.kv
+
+#:import ScreenManager kivy.uix.screenmanager.ScreenManager
+
+MDScreen:
+    main_w: main_window
+    map_w: map_window
+    next_w: next_window
+    buddy_w: buddy_window
+
+    MDBottomNavigation:
+        size_hint: 1, 1
+        title: "Choose Destination"
+        panel_color: app.theme_cls.primary_color
+        md_bg_color: app.theme_cls.primary_light
+
+        MDBottomNavigationItem:
+            name: 'main'
+            text: 'Main'
+            icon: 'home'
+
+            MainWindow:
+                id: main_window
+
+        MDBottomNavigationItem:
+            name: 'map'
+            text: 'Map'
+            icon: 'map-search-outline'
+            on_tab_release:
+                app.root.map_w.start_plotting_points_in_fov()
+
+            MapWindow:
+                id: map_window
+
+        MDBottomNavigationItem:
+            name: 'next'
+            text: 'Next Station'
+            icon: 'map-marker-right'
+
+            NextWindow:
+                id: next_window
+
+        MDBottomNavigationItem:
+            name: 'buddy'
+            text: 'Find Friend'
+            icon: 'account-question'
+
+            BuddyWindow:
+                id: buddy_window
+

@@ -1,0 +1,96 @@
+#:import BuddyWindow appcore.buddy_window.BuddyWindow
+
+<CustomTwoLineListItem@TwoLineListItem>
+    theme_text_color: "ContrastParentBackground"
+    secondary_theme_text_color: "Custom"
+    secondary_text_color: 'grey'
+
+<BuddyWindow>:
+    name: "buddy_window"
+    size: root.width, root.height
+    input_bib: bib
+    runner_name: runner_name
+    runner_bib: runner_bib
+    dnf_status: dnf_status
+    last_checkin: last_checkin
+    FitImage:
+        source: 'img/vit100.jpeg'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        size: root.size
+        pos_hint: {'center_x': 0.5}
+        padding: [0, 50, 0, 0]
+        spacing: "30dp"
+
+        MDLabel:
+            font_style: 'H2'
+            bold: True
+            text: 'Find Friend'
+            size_hint: 0.8, 0.1
+            pos_hint: {'center_x': 0.5}
+            halign: 'center'
+            color: 1, 1, 1, 1
+
+        MDTextFieldRect:
+            id: bib
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            size_hint: (0.8, 0.1)
+            font_style: 'H4'
+            mode: 'rectangle'
+            multiline: False
+            mode: 'rectangle'
+            hint_text: 'Enter bib number'
+            font_size: '28sp'
+            color_mode: 'accent'
+
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            size_hint: 0.8, 0.1
+            height: root.height * 0.1
+            spacing: "20dp"
+            padding: [0, 0, 0, 30]
+
+            MDFlatButton:
+                text: 'Search'
+                pos_hint: {'x': 0.4}
+                font_style: 'Button'
+                md_bg_color: app.theme_cls.primary_dark
+                on_release:
+                    root.get_buddy_data()
+
+            MDFlatButton:
+                text: 'Refresh'
+                pos_hint: {'x': 0.6}
+                font_style: 'Button'
+                md_bg_color: app.theme_cls.primary_dark
+                on_release:
+                    root.display_buddy_data()
+
+        MDScrollView:
+            size_hint: 0.8, 0.7
+            pos_hint: {'center_x': 0.5}
+
+            MDList:
+                md_bg_color: app.theme_cls.primary_light
+                font_style: 'H5'
+                padding: [10, 10, 10, 10]
+
+                CustomTwoLineListItem:
+                    id: runner_bib
+                    text: 'BIB NUMBER:'
+                    secondary_text: 'Not available'
+                CustomTwoLineListItem:
+                    id: runner_name
+                    text: 'RUNNER NAME:'
+                    secondary_text: 'Not available'
+                CustomTwoLineListItem:
+                    id: dnf_status
+                    text: 'DNF STATUS:'
+                    secondary_text: 'Not available'
+                CustomTwoLineListItem:
+                    id: last_checkin
+                    text: 'LAST CHECKIN:'
+                    secondary_text: 'Not available'

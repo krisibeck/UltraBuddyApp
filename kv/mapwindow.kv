@@ -1,0 +1,44 @@
+#:import MapWindow appcore.map_window.MapWindow
+#:include kv/gpsblinker.kv
+
+<MapWindow>:
+    name: "map_window"
+    size: root.width, root.height
+    main_map: the_main_map
+    blinker: blinker
+
+    MapView:
+        id: the_main_map
+
+        zoom: 10
+        double_tap_zoom: True
+        on_zoom:
+            self.zoom = 10 if self.zoom < 10 else self.zoom
+        on_lat:
+            root.start_plotting_points_in_fov()
+        on_lon:
+            root.start_plotting_points_in_fov()
+
+        MarkerMapLayer:
+            id: points_layer
+
+        MarkerMapLayer:
+            id: blinker_layer
+            GpsBlinker:
+                id: blinker
+
+        MDFloatingActionButton:
+            icon: 'magnify-minus'
+            pos: root.width - self.width*1.2, root.height - self.height*1.2
+            md_bg_color: app.theme_cls.primary_color
+            on_press:
+                root.main_map.zoom = 10
+                root.main_map.center_on(*app.map_model.map_center)
+
+        MDFloatingActionButton:
+            icon: 'crosshairs'
+            pos: root.width - self.width*1.2, root.height - self.height*2.4
+            md_bg_color: app.theme_cls.primary_color
+            on_press:
+                root.main_map.zoom = 12
+                root.main_map.center_on(blinker.lat, blinker.lon)

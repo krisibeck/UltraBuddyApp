@@ -1,0 +1,54 @@
+#:import NextWindow appcore.next_window.NextWindow
+
+
+<NextWindow>:
+    name: "next_window"
+    size: root.width, root.height
+    next_st: next_st
+    elev_gain: elev_gain
+    elev_loss: elev_loss
+    closest_st: closest_st
+    until_end: until_end
+    FitImage:
+        source: 'img/vit100.jpeg'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        size: root.size
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        padding: [0, 30, 0, 0]
+        spacing: "30dp"
+
+        MDLabel:
+            font_style: 'H2'
+            bold: True
+            pos_hint: {'center_x': 0.5}
+            text: 'Next Station'
+            size_hint: (0.8, 0.25)
+            halign: 'center'
+            color: 1, 1, 1, 1
+
+        MDScrollView:
+            size_hint: 0.8, 0.75
+            pos_hint: {'center_x': 0.5}
+
+            MDList:
+                md_bg_color: app.theme_cls.primary_light
+                font_style: 'H5'
+                padding: [10, 10, 10, 10]
+
+                CustomTwoLineListItem:
+                    id: next_st
+                    text: 'NEXT STATION:'
+                CustomTwoLineListItem:
+                    id: elev_gain
+                    text: 'ELEVATION GAIN:'
+                CustomTwoLineListItem:
+                    id: elev_loss
+                    text: 'ELEVATION LOSS:'
+                CustomTwoLineListItem:
+                    id: closest_st
+                    text: 'CLOSEST STATION:'
+                CustomTwoLineListItem:
+                    id: until_end
+                    text: 'DISTANCE TO FINISH'

@@ -1,0 +1,24 @@
+#:import GpsBlinker appcore.gpsblinker.GpsBlinker
+
+<GpsBlinker>:
+    default_blink_size: 10
+    blink_size: 10
+    source: 'img/clearish_marker.png'
+    outer_opacity: 1
+
+    canvas.before:
+        # outer circle
+        Color:
+            rgba: [201/201,0,22/201] + [root.outer_opacity]
+        RoundedRectangle:
+            radius: [root.blink_size/2.0, ]
+            size: [root.blink_size, root.blink_size]
+            pos: root.pos[0] + root.size[0]/2.0 - root.blink_size/2.0, root.pos[1] + root.size[1]/2.0 - root.blink_size/2.0
+
+        # inner circle
+        Color:
+            rgb: 201/201,0,22/201
+        RoundedRectangle:
+            radius: [root.default_blink_size/2.0]
+            size: [root.default_blink_size, root.default_blink_size]
+            pos: [root.pos[0] + root.size[0]/2.0 - root.default_blink_size/2.0, root.pos[1] + root.size[1]/2.0 - root.default_blink_size/2.0]

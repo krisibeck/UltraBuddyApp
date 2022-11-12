@@ -1,0 +1,78 @@
+#:import MainWindow appcore.main_window.MainWindow
+#:import BuddyWindow appcore.buddy_window.BuddyWindow
+
+<NavLabel@MDLabel>:
+    font_style: 'H5'
+    halign: 'center'
+    md_bg_color: app.theme_cls.primary_light
+    color: app.theme_cls.primary_dark
+
+
+<MainWindow>:
+    name: "main_window"
+    size_hint: 1, 1
+    FitImage:
+        source: 'img/vit100.jpeg'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        adaptive_size: True
+        pos_hint: {"center_x": 0.5}
+        spacing: '60dp'
+        padding: [20, 20, 20, 20]
+
+        MDLabel:
+            text: 'Ultra Buddy'
+            font_style: 'H2'
+            halign: 'center'
+            pos_hint: {"center_x": 0.5}
+            adaptive_size: True
+            color: 1, 1, 1, 1
+
+        MDSmartTile:
+            id: smart_tile
+            radius: 24
+            box_radius: [0, 0, 14, 14]
+            box_color: app.theme_cls.primary_light
+            source: "img/vit100b.jpeg"
+            pos_hint: {"center_x": 0.5}
+            size_hint: None, None
+            size: "300dp", "300dp"
+            box_position: "footer"
+
+            MDLabel:
+                text: "2022 RACE"
+                font_style: 'H5'
+                halign: 'center'
+                bold: True
+                color: app.theme_cls.primary_dark
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            adaptive_size: True
+            pos_hint: {'center_y': 0.5}
+            spacing: '20dp'
+            padding: [0, 30, 0, 30]
+
+            MDRaisedButton:
+                text: "Vitosha\n100"
+                font_style: 'Button'
+                pos_hint: {'center_x': 0.5}
+                on_release:
+                    root.change_race_to_vitosha100(*args)
+
+            MDRaisedButton:
+                text: "Tryavna\n100"
+                font_style: 'Button'
+                pos_hint: {'center_x': 0.5}
+                on_release:
+                    root.change_race_to_tryavna100(*args)
+
+            MDRaisedButton:
+                id: change_race
+                text: "Persenk\n100"
+                font_style: 'Button'
+                pos_hint: {'center_x': 0.5}
+                on_release:
+                    root.change_race_to_persenk110(*args)
+
