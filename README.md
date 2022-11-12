@@ -5,7 +5,8 @@
 
 [//]: <> (Image of App)
 
-<style>
+(setq markdown-xhtml-header-content
+"<style>
 .column {
     flex: 33.33%;
     padding: 5px;
@@ -13,7 +14,7 @@
 .row {
     display: flex;
 }
-</style>
+</style>")
 
 <div class="row">
     <div class="column">
