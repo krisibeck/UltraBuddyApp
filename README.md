@@ -5,9 +5,9 @@
 
 [//]: <> (Image of App)
 
-![alt text]: (https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png "Home screen")
-![alt text]: (https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png "Home screen")
-![alt text]: (https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png "Home screen")
+![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png "Home screen")
+![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/map_screen_small.png "Home screen")
+![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/map_screen_zoomed_in.png "Home screen")
 
 
 > Ultra Buddy provides information for runners during ultra races. 
