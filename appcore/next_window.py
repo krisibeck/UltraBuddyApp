@@ -4,6 +4,7 @@ from kivymd.uix.screen import MDScreen
 
 
 class NextWindow(MDScreen):
+    """Displays information about the next station."""
     next_st = ObjectProperty(None)
     closest_st = ObjectProperty(None)
     elev_gain = ObjectProperty(None)
@@ -11,6 +12,7 @@ class NextWindow(MDScreen):
     until_end = ObjectProperty(None)
 
     def respond_to_model_update(self):
+        """Responds to changes in MapModel by updating next station info."""
         app = MDApp.get_running_app()
         info = app.map_model.next_station_info
         # print(info)

@@ -31,7 +31,8 @@ class MapWindow(MDScreen):
             st_view.btn.bind(on_touch_down=btn_callback)
 
     def popup_station_and_zoom(self, st_touched, source, touch):
-        """Bound event on_touch_down for each StationView popup - shows popup with station name."""
+        """Bound event on_touch_down for each StationView popup - shows distance from runner on popup
+        and zooms map on station."""
         if source.collide_point(*touch.pos):
             for station in self.station_views:
                 if station != st_touched and station.is_open:
@@ -60,6 +61,8 @@ class MapWindow(MDScreen):
         self.plotting_points_timer = Clock.schedule_once(self.plot_points_in_fov, 0.5)
 
     def plot_points_in_fov(self, clock):
+        """Plots points from route as a function of the zoom level - more points are plotted with
+        closer zoom. Checks if points have already been plotted before plotting them."""
         # print(f'{clock} since self.getting_waypoints_timer was set (should be ~ 0.5 sec)')
         # print(f'Current zoom is: {self.main_map.zoom}')
         # print(f'The four corners of the map are: {self.main_map.get_bbox()}')
@@ -78,11 +81,13 @@ class MapWindow(MDScreen):
                 self.main_map.add_marker(point)
 
     def respond_to_model_update(self):
+        """Responds to MapModel updates by changing the GPS blinker location."""
         new_lat, new_lon = self.app.map_model.runner_path[-1][:2]
         self.blinker.lat = new_lat
         self.blinker.lon = new_lon
 
     def reset_map(self):
+        """Resets map when race is changed."""
         for st in self.station_views:
             self.remove_widget(st)
         for pt in self.plotted_route_points:

@@ -5,6 +5,9 @@ from appcore.station_model import StationModel
 
 
 class MapModel:
+    """Keeps the logic of the map and gets update when new GPS coordinates are received.
+    Observed by Mapview, which is notified when self is updated.
+    New MapModel is initialized when race is changed."""
     def __init__(self, db_path, table):
         self.model_name = table
         self.points = None
@@ -23,12 +26,14 @@ class MapModel:
         self.observers = []
 
     def _get_track_points(self, cursor, table_name):
+        """Queries DB for all points on route."""
         query = "SELECT name FROM sqlite_master WHERE type='table' and name=?"
         validated_table_name = cursor.execute(query, (table_name,)).fetchone()[0]
-        cursor.execute(f"SELECT latitude, longitude, elevation, distance FROM {validated_table_name} WHERE st_name is NULL")
+        cursor.execute(f"SELECT latitude, longitude, elevation, distance FROM {validated_table_name}")
         self.points = cursor.fetchall()
 
     def _get_station_points(self, cursor, table_name):
+        """Queries DB for all points on route that are stations."""
         query = "SELECT name FROM sqlite_master WHERE type='table' and name = ?"
         validated_table_name = cursor.execute(query, (table_name,)).fetchone()[0]
         cursor.execute(f"SELECT * FROM {validated_table_name} WHERE st_name is NOT NULL")
@@ -36,18 +41,19 @@ class MapModel:
 
     def _make_station_objects(self, cursor, table):
         """Pins the stations along the route and saves them as a list of Station() objects in self.stations"""
-
         for station in self._get_station_points(cursor, table):
             st_lat, st_lon, elev, dist, st_name = station
             st = StationModel(st_name, st_lat, st_lon, elev, dist, 0)
             self.model_stations.append(st)
 
-    def get_center_of_map_from_stations(self):
+    def get_center_of_map_from_stations(self) -> tuple:
+        """Returns center of map as tuple."""
         avg_lat = sum(p.lat for p in self.model_stations)/len(self.model_stations)
         avg_lon = sum(p.lon for p in self.model_stations)/len(self.model_stations)
         return (avg_lat, avg_lon)
 
-    def get_next_station_info(self):
+    def get_next_station_info(self) -> dict:
+        """Returns a dictionary with information about next station."""
         runner = self.runner_path[-1]
         until_end = self.points[-1][3] - runner[3]
         min_dist = 100
@@ -72,8 +78,8 @@ class MapModel:
                 'loss': elev_loss,
                 'end': until_end}
 
-    def get_closest_point_on_track(self, gps_lat, gps_lon):
-        # TODO use self.runner_path to check if it's the end or the start of the race?
+    def get_closest_point_on_track(self, gps_lat, gps_lon) -> tuple:
+        """Returns closest point on track to GPS position."""
         min_diff = sys.maxsize
         closest_point = None
         # print(self.points)
@@ -88,7 +94,11 @@ class MapModel:
         return closest_point
 
     def update_model_from_gps_pos(self, gps_lat, gps_lon):
-        # Find the closest point of the .gpx track to the gps location and add it to runner path
+        """Updates MapModel upon receiving new GPS coordiante.
+         Updates runner path with closest point from route based on new GPS position.
+         Updates dist_diff from runner for each station.
+         Notifies observers of self update."""
+
         self.get_closest_point_on_track(gps_lat, gps_lon)
         for st in self.model_stations:
             st.update_station_dist_diff_from_runner(self.runner_path[-1][3])
@@ -97,14 +107,15 @@ class MapModel:
         # print(self.observers)
 
     def add_observer(self, observer):
+        """Add observer to MapModel."""
         self.observers.append(observer)
 
     def notify_observers(self):
+        """Notify observers of MapModel update."""
         for observer in self.observers:
             observer.respond_to_model_update()
 
 if __name__ == '__main__':
-    # TODO Write tests!
     pass
     # mm = MapModel('ultra_buddy3.db')
     # print(mm.points)

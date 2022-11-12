@@ -1,5 +1,6 @@
 
 class StationModel:
+    """A model for stations along the running route."""
     def __init__(self, name, lat, lon, elev, dist, dist_diff):
         self.name = name
         self.lat = lat

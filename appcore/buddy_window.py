@@ -8,6 +8,8 @@ from kivymd.uix.screen import MDScreen
 
 
 class BuddyWindow(MDScreen):
+    """Displays latest information about friend from race live tracking.
+    Available only for some races - pops dialog box for unavailable races."""
     dialog = None
     input_bib = ObjectProperty(None)
     runner_bib = ObjectProperty(None)
@@ -16,6 +18,7 @@ class BuddyWindow(MDScreen):
     last_checkin = ObjectProperty(None)
 
     def get_buddy_data(self):
+        """Makes url request from bib number to live tracking website."""
         input_bib = self.input_bib.text
         if not len(input_bib) == 4 or not input_bib.isdigit():
             info = 'Runner bib should be a 4-digit number!'
@@ -32,8 +35,10 @@ class BuddyWindow(MDScreen):
         UrlRequest(race_result_url, on_success=self.process_successful_buddy_request, on_failure=self.failure, on_error=self.error, ca_file=certifi.where())
 
     def process_successful_buddy_request(self, urlrequest, response):
+        """Processes successful url requests."""
         self.buddy_data = response
-        # with open('samplejsonDNF.json', 'r') as f:
+        # Uncomment to use sample
+        # with open('sample_data/samplejsonDNF.json', 'r') as f:
         #     self.buddy_data = json.load(f)
 
         if not self.buddy_data['data']:
@@ -55,6 +60,7 @@ class BuddyWindow(MDScreen):
         self.dialog.dismiss(force=True)
 
     def show_dialog(self, info, *args):
+        """Dialog popped in case of errors."""
         if not self.dialog:
             self.dialog = MDDialog(
                 text=info,
@@ -70,6 +76,7 @@ class BuddyWindow(MDScreen):
         self.dialog.open()
 
     def display_buddy_data(self):
+        """Displays friend information in MDList."""
         # bib
         self.runner_bib.secondary_text = self.buddy_data['data'][0][0]
         # name

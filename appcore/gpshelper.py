@@ -8,8 +8,7 @@ class GpsHelper:
     """Controls gps services and actions upon obtaining new gps coordinates."""
 
     def run(self):
-        """Initiated on_start of App - start blinking the gps_blinker, requests permsissions,
-        starts collecting gps data every 30 seconds"""
+        """Initiates GPS collection, including requesting persmissions."""
         gps_blinker = App.get_running_app().root.map_w.ids.blinker
         gps_blinker.blink()
 
@@ -39,15 +38,16 @@ class GpsHelper:
             gps.start(minTime=15000, minDistance=100)
 
     def stop(self):
-        """Initiated on_pause of App to stop collecting gps data."""
+        """Initiated on_pause of App to stop collecting GPS data."""
         print('GPS stopped...')
         gps.stop()
 
     def resume(self):
-        """Initiated on_resume of App to start collecting gps data again (no permissions needed)."""
+        """Initiated on_resume of App to start collecting GPS data again (no permissions needed)."""
         gps.start(minTime=15000, minDistance=100)
 
     def pass_new_gps_to_map_model(self, *args, **kwargs):
+        """Updates MapModel with new GPS position."""
         # gps_lat = kwargs['lat']
         # gps_lon = kwargs['lon']
         # Can use these hard-coded coordinates for testing
