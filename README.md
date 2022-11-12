@@ -6,15 +6,13 @@
 [//]: <> (Image of App)
 
 <style>
-    .column {
-        float: left;
-        width: 33.33%;
-        padding: 5px;
-    }
-    .row::after {
-        flex: 33.33%;
-        padding: 5px;
-    }
+.column {
+    flex: 33.33%;
+    padding: 5px;
+}
+.row {
+    display: flex;
+}
 </style>
 
 <div class="row">
