@@ -5,9 +5,29 @@
 
 [//]: <> (Image of App)
 
-<p align="center">
-    <img align="center" src="https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png"/>
-</p>
+<style>
+    .row {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+    }
+    .column {
+        flex: 33.33%;
+        padding: 5px;
+    }
+</style>
+
+<div class="row">
+    <div class="column">
+        <img align="center" src="https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png"/>
+    </div>
+    <div class="column">
+        <img align="center" src="https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png"/>
+    </div>
+    <div class="column">
+        <img align="center" src="https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png"/>
+    </div>
+</div>
 
 > Ultra Buddy provides information for runners during ultra races. 
 > The runner can see a map of the race with aid stations along the way.
