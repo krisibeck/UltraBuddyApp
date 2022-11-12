@@ -47,7 +47,7 @@ class MapModel:
         avg_lon = sum(p.lon for p in self.model_stations)/len(self.model_stations)
         return (avg_lat, avg_lon)
 
-    def get_closest_station_info(self):
+    def get_next_station_info(self):
         runner = self.runner_path[-1]
         until_end = self.points[-1][3] - runner[3]
         min_dist = 100
@@ -89,10 +89,10 @@ class MapModel:
 
     def update_model_from_gps_pos(self, gps_lat, gps_lon):
         # Find the closest point of the .gpx track to the gps location and add it to runner path
-        self.runner_path.append(self.get_closest_point_on_track(gps_lat, gps_lon))
+        self.get_closest_point_on_track(gps_lat, gps_lon)
         for st in self.model_stations:
             st.update_station_dist_diff_from_runner(self.runner_path[-1][3])
-        self.next_station_info = self.get_closest_station_info()
+        self.next_station_info = self.get_next_station_info()
         self.notify_observers()
         # print(self.observers)
 
