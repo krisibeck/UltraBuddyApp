@@ -6,7 +6,7 @@
 [//]: <> (Image of App)
 
 (setq markdown-xhtml-header-content
-"<style>
+"<style type='text/css'>
 .column {
     flex: 33.33%;
     padding: 5px;
