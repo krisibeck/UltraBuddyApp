@@ -6,12 +6,12 @@
 [//]: <> (Image of App)
 
 <style>
-    .row {
+    .column {
         float: left;
         width: 33.33%;
         padding: 5px;
     }
-    .column {
+    .row::after {
         flex: 33.33%;
         padding: 5px;
     }
