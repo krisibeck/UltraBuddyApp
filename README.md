@@ -7,7 +7,7 @@ The runner can see a map of the race with aid stations along the way.
 By touching an aid station, the runner is shown the distance remaining to that station. 
 More detailed information, such as elevation gain and lost is available also. 
 Three running races are currently integrated into the app: Vitosha100, Tryavna100, and Persenk110.
-- [![Video Demo]](https://www.youtube.com/watch?v=9Y7RaWTjJjw)
+- ![Video Demo](https://www.youtube.com/watch?v=9Y7RaWTjJjw)
 ---
 ![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png "Home screen")
 ![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/map_screen_small.png "Map screen")
