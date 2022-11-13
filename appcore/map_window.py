@@ -85,6 +85,7 @@ class MapWindow(MDScreen):
         new_lat, new_lon = self.app.map_model.runner_path[-1][:2]
         self.blinker.lat = new_lat
         self.blinker.lon = new_lon
+        self.main_map.trigger_update(full=False)
 
     def reset_map(self):
         """Resets map when race is changed."""

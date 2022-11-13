@@ -7,7 +7,7 @@
 
 ![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/home_screen_small.png "Home screen")
 ![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/map_screen_small.png "Map screen")
-![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/map_screen_zoomed_in.png "Map screen")
+![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/map_screen_zoom_small.png "Map screen")
 ![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/next_screen_small.png "Next screen")
 
 

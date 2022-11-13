@@ -23,7 +23,7 @@ class GpsHelper:
                     print("Got all permissions")
                     gps.configure(on_location=self.pass_new_gps_to_map_model,
                                   on_status=self.on_auth_status)
-                    gps.start(minTime=30000, minDistance=100)
+                    gps.start(minTime=15000, minDistance=100)
                 else:
                     print("Did not get all permissions")
 
@@ -35,7 +35,7 @@ class GpsHelper:
         if platform == 'ios':
             gps.configure(on_location=self.pass_new_gps_to_map_model,
                           on_status=self.on_auth_status)
-            gps.start(minTime=15000, minDistance=100)
+            gps.start(minTime=15000, minDistance=0)
 
     def stop(self):
         """Initiated on_pause of App to stop collecting GPS data."""
@@ -44,7 +44,7 @@ class GpsHelper:
 
     def resume(self):
         """Initiated on_resume of App to start collecting GPS data again (no permissions needed)."""
-        gps.start(minTime=15000, minDistance=100)
+        gps.start(minTime=15000, minDistance=0)
 
     def pass_new_gps_to_map_model(self, *args, **kwargs):
         """Updates MapModel with new GPS position."""
@@ -53,9 +53,10 @@ class GpsHelper:
         # Can use these hard-coded coordinates for testing
         gps_lat = 42.50049
         gps_lon = 23.206102
-        print("GPS POSITION:", gps_lat, gps_lon)
         app = App.get_running_app()
-        app.map_model.update_model_from_gps_pos(gps_lat, gps_lon)
+        if abs(gps_lat - app.map_model.map_center[0]) < 1 and abs(gps_lon - app.map_model.map_center[1]) < 1:
+            print("GPS POSITION:", gps_lat, gps_lon)
+            app.map_model.update_model_from_gps_pos(gps_lat, gps_lon)
 
 
     def on_auth_status(self, general_status, status_message):
