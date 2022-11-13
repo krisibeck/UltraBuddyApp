@@ -4,10 +4,12 @@
     theme_text_color: "ContrastParentBackground"
     secondary_theme_text_color: "Custom"
     secondary_text_color: 'grey'
+    font_style: 'H6'
+    secondary_font_style: 'H6'
 
 <BuddyWindow>:
     name: "buddy_window"
-    size: root.width, root.height
+    size: root.size
     input_bib: bib
     runner_name: runner_name
     runner_bib: runner_bib
@@ -20,7 +22,7 @@
         orientation: 'vertical'
         size: root.size
         pos_hint: {'center_x': 0.5}
-        padding: [0, 50, 0, 0]
+        padding: [0, 100, 0, 0]
         spacing: "30dp"
 
         MDLabel:

@@ -16,3 +16,15 @@ class StationView(MapMarkerPopup):
                                 valign='center',
                                 halign='center')
         self.add_widget(self.btn)
+
+    def update_btn_label_with_distance(self):
+        """Shows distance between station and runner on station popup."""
+        display_dist = '+' + str(round(self.model.dist_diff, 1)) \
+            if self.model.dist_diff >= 0 \
+            else str(round(self.model.dist_diff, 1))
+        self.btn.text = self.model.name + '\n' + f'{display_dist} km'
+
+    def respond_to_model_update(self):
+        """If the distance was already shown on station popup, update it."""
+        if "See" not in self.btn.text:
+            self.update_btn_label_with_distance()

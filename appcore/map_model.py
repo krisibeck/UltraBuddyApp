@@ -14,6 +14,7 @@ class MapModel:
         self.model_stations = []
         self.runner_path = []
         self.next_station_info = None
+        self.observers = []
 
         connection = sqlite3.connect(db_path)
         cursor = connection.cursor()
@@ -23,7 +24,6 @@ class MapModel:
 
         self.map_center = self.get_center_of_map_from_stations()
 
-        self.observers = []
 
     def _get_track_points(self, cursor, table_name):
         """Queries DB for all points on route."""
@@ -45,6 +45,7 @@ class MapModel:
             st_lat, st_lon, elev, dist, st_name = station
             st = StationModel(st_name, st_lat, st_lon, elev, dist, 0)
             self.model_stations.append(st)
+            self.add_observer(st)
 
     def get_center_of_map_from_stations(self) -> tuple:
         """Returns center of map as tuple."""
@@ -82,15 +83,12 @@ class MapModel:
         """Returns closest point on track to GPS position."""
         min_diff = sys.maxsize
         closest_point = None
-        # print(self.points)
         for point in self.points:
             diff = abs(point[0] - gps_lat) + abs(point[1] - gps_lon)
             if diff < min_diff:
                 min_diff = diff
                 closest_point = point
         self.runner_path.append(closest_point)
-        # print('runner path', self.runner_path)
-        # print(closest_point)
         return closest_point
 
     def update_model_from_gps_pos(self, gps_lat, gps_lon):
@@ -101,10 +99,9 @@ class MapModel:
 
         self.get_closest_point_on_track(gps_lat, gps_lon)
         for st in self.model_stations:
-            st.update_station_dist_diff_from_runner(self.runner_path[-1][3])
+            st.respond_to_model_update()
         self.next_station_info = self.get_next_station_info()
         self.notify_observers()
-        # print(self.observers)
 
     def add_observer(self, observer):
         """Add observer to MapModel."""

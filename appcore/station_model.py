@@ -1,3 +1,5 @@
+from kivymd.app import MDApp
+
 
 class StationModel:
     """A model for stations along the running route."""
@@ -10,8 +12,10 @@ class StationModel:
         self.dist_diff = dist_diff
         self.observers = []
 
-    def update_station_dist_diff_from_runner(self, runner_dist):
+    def respond_to_model_update(self):
+        runner_dist = MDApp.get_running_app().map_model.runner_path[-1][3]
         self.dist_diff = self.dist - runner_dist
+        self.notify_observers()
 
     def notify_observers(self):
         for observer in self.observers:

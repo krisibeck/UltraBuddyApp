@@ -38,10 +38,7 @@ class MapWindow(MDScreen):
                 if station != st_touched and station.is_open:
                     station.refresh_open_status()
             if st_touched.model.dist_diff:
-                display_dist = '+' + str(round(st_touched.model.dist_diff, 1)) \
-                    if st_touched.model.dist_diff >= 0 \
-                    else str(round(st_touched.model.dist_diff, 1))
-                st_touched.btn.text = st_touched.model.name + '\n' + f'{display_dist} km'
+                st_touched.update_btn_label_with_distance()
             self.main_map.center_on(st_touched.lat, st_touched.model.lon)
             self.main_map.zoom = 12
 
