@@ -21,15 +21,23 @@ Three running races are currently integrated into the app: Vitosha100, Tryavna10
 ## Technologies
 <div>
     <img src="https://github.com/devicons/devicon/blob/master/icons/python/python-original-wordmark.svg" width="40" height="40"/>&nbsp;
-    <img scr="https://github.com/devicons/devicon/blob/master/icons/android/android-original-wordmark.svg" width="40" height="40"/>&nbsp;
-    <img scr="https://raw.githubusercontent.com/kivy/kivy/master/kivy/data/logo/kivy-icon-256.png" width="40" height="40"/>&nbsp;
+    <img src="https://github.com/devicons/devicon/blob/master/icons/android/android-original-wordmark.svg" width="40" height="40"/>&nbsp;
+    <img src="https://raw.githubusercontent.com/kivy/kivy/master/kivy/data/logo/kivy-icon-256.png" width="40" height="40"/>&nbsp;
 </div>
+
 The project is created with: 
-* Python 3.10.7
-* Kivy 2.1.0
-* KivyMD 1.1.1
-* Plyer 2.0.0
-* Buildozer 1.4.0
+- Python 3.10.7
+- Kivy 2.1.0
+- KivyMD 1.1.1
+- Plyer 2.0.0
+- Buildozer 1.4.0
+
+## Installation
+The mobile app is available as an .apk:
+- ![Ultra Buddy apk](https://github.com/krisibeck/UltraBuddyApp/tree/master/apk "Ultra Buddy Apk")
+
+To run as a desktop app, clone the repo: 
+- ![Ultra Buddy repo](https://github.com/krisibeck/UltraBuddyApp.git "Ultra Buddy Repo")
 
 ## Contributing
 
