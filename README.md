@@ -16,10 +16,20 @@ Three running races are currently integrated into the app: Vitosha100, Tryavna10
 ![alt text](https://github.com/krisibeck/UltraBuddyApp/blob/master/img/next_screen_small.png "Next screen")
 ---
 ## Installation
-The mobile app is available as an .apk:
+The mobile app is available as an .apk in the repo. To install the mobile app, copy the .apk file on your Android device and open the file to install the app.
 - ![Ultra Buddy apk](https://github.com/krisibeck/UltraBuddyApp/tree/master/apk "Ultra Buddy Apk")
 
-To run as a desktop app, clone the repo and run main.py.
+To run as a desktop app: 
+1. Clone the repo into a new directory on your machine.
+2. Pip install the required modules:
+```bash
+$ pip install -r requirement.txt
+```
+4. Run main.py with your Python interpreter.
+```bash
+$ python main.py
+```
+Note: For the "find friend" feature to work, you have to obtain the config.ini file, which is not included in this repository. 
 
 ## Dependencies
 <div>
@@ -34,6 +44,7 @@ The project is created with:
 - KivyMD 1.1.1
 - Plyer 2.0.0
 - Buildozer 1.4.0
+For detailed requirements, please the requirements.txt file. 
 
 ## Contributing
 
