@@ -44,6 +44,7 @@ The project is created with:
 - KivyMD 1.1.1
 - Plyer 2.0.0
 - Buildozer 1.4.0
+
 For detailed requirements, please the requirements.txt file. 
 
 ## Contributing
